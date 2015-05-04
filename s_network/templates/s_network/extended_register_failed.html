@@ -1,0 +1,57 @@
+{% extends "s_network/base.html" %}
+
+{% load staticfiles %}
+
+
+
+{% block header %}
+Hello! Welcome to the S Network!
+{% endblock %}
+
+{% block sub_header %}
+<h1 style='font-size:200%'>Uh oh! Something went wrong! Try again please.</h1>
+{% endblock %}
+
+{% block l_sidebar %}
+<a href='/s_network/'>cancel</a>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+{% endblock %}
+
+
+
+{% block l_content %}
+<form action={% url 'register' %} method='POST'>
+		{% csrf_token %}
+	    <div class='grid_4'>
+	        Choose your Username: <br /><input type='text' name='username' size='20' />
+	        <br />
+	        Your email: <br /><input type='text' name='email' size='20' />
+	        <br />
+	        Choose your Password: <br /><input type='password' name='password' size='20' />
+	        <br />
+	        Confirm your password: <br /><input type='password' name='password_confirm' size='20' />
+	        <br />
+	        What is your First name? <br /><input type='text' name='first_name' size='20' /> 
+	        <br />
+	        Last name? <br /><input type='text' name='last_name' size='20' />
+	        <br />
+	        What is your birthday? <br /><input type='date' name='birthday' size='20' />
+	    </div>
+	    <div class='grid_1'>
+	        <input type='submit' value='submit' id='id_register_form'/>
+	    </div>
+	</form>
+	
+{% endblock %}
+
+
+
+{% block r_content %}
+<div> </div>
+{% endblock %}
+
+
+
+{% block r_sidebar %}
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+{% endblock %}

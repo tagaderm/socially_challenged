@@ -1,0 +1,47 @@
+{% extends "s_network/base.html" %}
+
+{% load staticfiles %}
+
+
+
+{% block header %}
+Choose a new Profile picture
+{% endblock %}
+
+
+
+{% block l_sidebar %}
+<a href='/s_network/{{username}}' style='background:pink'>Cancel</a>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+{{ user }} is logged in.
+{% endblock %}
+
+
+
+{% block l_content %}
+{% for pic in pic_list %}
+			<!-- {{ pic_list }} -->
+			<form action={% url 'update_profile_pic' %} method='POST'>
+				{% csrf_token %}
+				<input type='text' style='display:none;' name='pic_url' value={{pic}}>
+				<div class='img' style="float:right">
+					<img src='{% static pic %}'/>
+					<br>
+					&emsp;&emsp;<button type='submit' onclick='' class='save'>choose this photo</button>
+				</div>
+			</form>
+			<br>
+		{% endfor %}
+{% endblock %}
+
+
+
+{% block r_content %}
+<div></div>
+{% endblock %}
+
+
+
+{% block r_sidebar %}
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+{% endblock %}

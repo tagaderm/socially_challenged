@@ -1,0 +1,45 @@
+{% extends "s_network/base.html" %}
+
+{% load staticfiles %}
+
+
+
+{% block header %}
+Upload a picture!
+{% endblock %}
+
+
+
+{% block l_sidebar %}
+<a href='/s_network/{{username}}' style='background:pink'>Cancel</a>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+{{ user }} is logged in.
+{% endblock %}
+
+
+
+{% block l_content %}
+<form action={% url 'insert_photo' %} method='POST' enctype='multipart/form-data'>
+	{% csrf_token %}
+	<input type='file' name='the_file' accept='image/*'>
+	<input type='submit'>
+</form>
+{% endblock %}
+
+
+
+{% block r_content %}
+	{% for pic in pic_list %}
+		<!-- {{ pic }} -->
+			<div class='img'>
+				<img src='{% static pic %}'/>
+			</div>
+			<br>
+	{% endfor %}
+{% endblock %}
+
+
+
+{% block r_sidebar %}
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+{% endblock %}

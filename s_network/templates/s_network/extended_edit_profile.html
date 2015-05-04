@@ -1,0 +1,47 @@
+{% extends "s_network/base.html" %}
+
+{% load staticfiles %}
+
+
+
+{% block header %}
+edit your profile
+{% endblock %}
+
+
+
+{% block l_sidebar %}
+<a href='/s_network/{{username}}' style='background:pink'>Cancel</a>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+{{ user }} is logged in.
+{% endblock %}
+
+
+
+{% block l_content %}
+<form action={% url 'update_profile' %} method='POST'>
+		{% csrf_token %}
+	    <div class='grid_4'>
+	        Your email: <br /><input type='text' name='email' size='20' />	       
+	        <br />
+	        What is your First name? <br /><input type='text' name='first_name' size='20' /> 
+	        <br />
+	        Last name? <br /><input type='text' name='last_name' size='20' />
+	    </div>
+	    <div class='grid_1'>
+	        <input type='submit' value='submit' id='id_register_form'/>
+	    </div>
+	</form>
+{% endblock %}
+
+
+
+{% block r_content %}
+<div></div>
+{% endblock %}
+
+
+
+{% block r_sidebar %}
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+{% endblock %}

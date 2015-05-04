@@ -1,0 +1,104 @@
+{% extends "s_network/base.html" %}
+
+{% load staticfiles %}
+
+
+
+{% block header %}
+All of {{ first_name }}'s Wall Posts
+{% endblock %}
+
+
+
+{% block l_sidebar %}
+
+<a href='/s_network/{{username}}' style='background:pink'>return to profile</a>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+{{ user }} is logged in<a href="https://youtu.be/dQw4w9WgXcQ" style="text-decoration: none; color: Black">.</a>
+
+{% endblock %}
+
+
+
+{% block l_content %}
+	<div class="img">
+		{% if profile_pic %}
+		<img src='{% static profile_pic %}'/>
+		{% endif %}
+	</div>
+	<br><br>
+	<form action={% url 'new_wall_post' %} method='POST'>
+		{% csrf_token %}
+
+		<div>
+			<textarea style='width: 99%;height: 120px' name='text' class='' data-limit='10000' placeholder='Type in a wall post here'></textarea>
+			<br>
+			<button type='submit' onclick='' class='save'>save wallpost</button>
+			<input type='text' style='display:none;' name='profile_user' value={{username}}></input>
+			<input type='text' style='display:none;' name='poster' value={{user}}></input>
+		</div>
+	</form>
+{% endblock %}
+
+
+
+{% block r_content %}
+	{% for post in wall_posts %}
+		{{post.post_date_time}} - <a href='/s_network/{{post.poster.user.username}}'>{{post.poster}}</a>
+		<div style="background:OrangeRed">
+			&emsp;{{ post.post_text }}
+			{% if user == post.poster.user.username %}
+				<form action={% url 'delete_wall_post' %} method='POST'>
+					{% csrf_token %}
+						<input type='text' style='display:none;' name='profile_user' value={{username}}></input>
+						<input type='hidden' name='id' value={{post.id}}>
+					<div>
+						<button type='submit' onclick=''>delete post</button>
+					</div>
+				</form>
+				{% endif %}
+			<br>
+		</div>
+			<div style="background:Gold">
+			{% for comment in comments %}
+				{% if comment.wallpost == post %}
+					<p style='color:#000099'>&emsp;&emsp;<em>{{comment.comment_date_time}} - <a href='/s_network/{{comment.commenter.user.username}}'>{{comment.commenter}}</a></em> </p>
+					<p style='color:#000099'>&emsp;&emsp;&emsp;<em>{{comment.comment_text}}</em> </p>
+
+					{% if user == comment.commenter.user.username %}
+						<form action={% url 'delete_comment' %} method='POST'>
+							{% csrf_token %}
+								<input type='text' style='display:none;' name='profile_user' value={{username}}></input>
+								<input type='hidden' name='id' value={{comment.id}}>
+							<div>
+								<button type='submit' onclick=''>delete comment</button>
+							</div>
+						</form>
+					{% endif %}
+					
+				{% endif %}	
+			{% endfor %}
+			</div>
+
+			<div style='margin-top: 10px;'>
+				<form action={% url 'new_comment' %} method='POST'>
+					{% csrf_token %}
+					<input type='hidden' name='id' value={{post.id}}>
+					<div class='grid_1'>
+						&emsp;&emsp;<textarea style='width: 40%;height: 60px' name='text' class='' data-limit='10000' placeholder='comment on above post'></textarea>
+						<br>
+						<input type='text' style='display:none;' name='commenter' value={{user}}></input>
+						&emsp;&emsp;<button type='submit' onclick='' class='save'>save comment</button>
+					</div>
+				</form>
+			</div>
+
+		<br><br>
+	{% endfor %}
+{% endblock %}
+
+
+
+{% block r_sidebar %}
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+{% endblock %}

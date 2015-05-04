@@ -1,0 +1,21 @@
+{% load staticfiles %}
+<html style="background:#8E8E8E">
+<head>
+<link rel="stylesheet" type="text/css" href="{% static 's_network/style.css' %}">
+
+<div id="header">
+<h1 style='font-size:300%'>{% block header %} {% endblock %}</h1>
+</div>
+
+<div id="header">
+<h1 style='font-size:200%'>{% block sub_header %} {% endblock %}</h1>
+</div>
+
+<div class="section group">
+	<div class="col span_1_of_4" style="background:#3366FF">{% block l_sidebar %} {% endblock %}</div>
+	<div class="col span_1_of_4">{% block l_content %} {% endblock %}</div>
+	<div class="col span_1_of_4">{% block r_content %} {% endblock %}</div>
+	<div class="col span_1_of_4" style="background:#3366FF">{% block r_sidebar %} {% endblock %}</div>
+</div>
+
+</html>

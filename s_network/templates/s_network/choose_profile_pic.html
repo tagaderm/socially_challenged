@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html style="background:#8E8E8E">
+<head>
+<link rel="stylesheet" type="text/css" href="{% static 's_network/style.css' %}">
+
+{% if user == username %}
+
+<a href='/s_network/{{username}}' style='background:pink'>Cancel</a>
+
+<div id="header">
+<h1 style='font-size:300%'>Choose a new Profile picture</h1>
+</div>
+
+<div class="section group">
+	<div class="col span_1_of_4" style="background:#3366FF; height:600px"></div>
+
+
+	<div class="col span_1_of_4">
+		{% for pic in pic_list %}
+			<!-- {{ pic_list }} -->
+			<form action={% url 'update_profile_pic' %} method='POST'>
+				{% csrf_token %}
+				<input type='text' style='display:none;' name='pic_url' value={{pic}}>
+				<div class='img' style="float:right">
+					<img src='{% static pic %}'/>
+					<br>
+					&emsp;&emsp;<button type='submit' onclick='' class='save'>choose this photo</button>
+				</div>
+			</form>
+			<br>
+		{% endfor %}
+	</div>
+
+
+	<div class="col span_1_of_4">
+		{% for pic in pic_list %}
+			<!-- {{ pic_list }} -->
+			<form action={% url 'update_profile_pic' %} method='POST'>
+				{% csrf_token %}
+				<input type='text' style='display:none;' name='pic_url' value={{pic}}>
+				<div class='img' style="float:left">
+					<img src='{% static pic %}'/>
+					<br>
+					&emsp;&emsp;<button type='submit' onclick='' class='save'>choose this photo</button>
+				</div>
+				<br>
+			</form>
+
+		{% endfor %}
+	</div>
+
+
+	<div class="col span_1_of_4" style="background:#3366FF; height:600px"></div>
+</div>
+
+
+
+
+
+{% endif %}
+
+
+{{ user }} is logged in.
+
+
+</head>
+</html>

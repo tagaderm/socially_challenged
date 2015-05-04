@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html style="background:#8E8E8E">
+<head>
+<link rel="stylesheet" type="text/css" href="{% static 's_network/style.css' %}">
+
+<div id="header">
+<h1 style='font-size:300%;'>Hello! Welcome to the S Network!</h1>
+</div>
+
+<div id="l_sidebar"></div>
+<div id="r_sidebar"></div>
+
+<div style='margin-top: 10px;'>
+	<form action={% url 'login' %} method='POST'>
+		{% csrf_token %}
+	    <div class='grid_4'>
+	        Username: <input type='text' name='username' size='20' />
+	        <br />
+	        Password: <input type='password' name='password' size='20' />
+	        <br />
+	    </div>
+	    <div class='grid_1'>
+	        <input type='submit' value='submit' id='id_login_form'/>
+	    </div>
+	</form>
+</div>
+
+<a href='/accounts/login/facebook/'>Log in with facebook(or connect up your account if you haven't yet)</a>
+<br>
+
+Or register?
+
+<br>
+<a href='register'>Register</a>
+
+<head>
+</html>

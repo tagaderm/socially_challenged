@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+
+<html style="background:#8E8E8E">
+
+<head>
+<link rel="stylesheet" type="text/css" href="{% static 's_network/style.css' %}">
+
+<div id="header">
+<h1 style='font-size:300%'>Photos</h1>
+</div>
+
+<div id="l_sidebar">
+<a href='/s_network/{{username}}' style='background:pink'>return to profile</a>
+</div>
+
+<div id="r_sidebar"></div>
+
+<br>
+
+
+{% if not pic_list %}
+	It seems that {{ first_name }} has not uploaded any photos yet.
+{% endif %}
+
+
+<div>
+	{% for pic in pic_list %}
+		<a href="/static/{{pic}}">
+			<div class='img'>
+				<img src='{% static pic %}'/>
+				<br>
+			</div>
+		</a>
+	{% endfor %}
+</div>
+
+</head>
+</html>

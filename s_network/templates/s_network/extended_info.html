@@ -1,0 +1,40 @@
+{% extends "s_network/base.html" %}
+
+{% load staticfiles %}
+
+
+
+{% block header %}
+{{ r_name }}'s info
+{% endblock %}
+
+
+
+{% block l_sidebar %}
+<a href='/s_network/{{ username }}/' style='background:pink'>Back to {{ r_name }}'s wall</a>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+{{ user }} is logged in.
+{% endblock %}
+
+
+
+{% block l_content %}
+{{ r_name }}'s birthday is {{ b_day }}
+<br>
+{{ r_name }}'s email is {{ email }}
+<br>
+{{ r_name }}'s username is {{ username }}
+<br><br>
+{% endblock %}
+
+
+
+{% block r_content %}
+<div> </div>
+{% endblock %}
+
+
+
+{% block r_sidebar %}
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+{% endblock %}

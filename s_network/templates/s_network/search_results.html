@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+
+<html style="background:#8E8E8E">
+
+<head>
+	<link rel="stylesheet" type="text/css" href="{% static 's_network/style.css' %}">
+		<div id="header">
+		<h1 style='font-size:300%'>Your Search Results</h1>
+		</div>
+		
+		<div id="l_sidebar"></div>
+		<div id="r_sidebar"></div>
+
+		Name  ---  username
+		<br>
+		{% for user in results %}
+			<a href='/s_network/{{ user.username }}'>{{ user.first_name }} {{ user.last_name }} - {{ user }}</a>
+			<br>
+			<br>
+		{% endfor %}
+</head>
+</html>

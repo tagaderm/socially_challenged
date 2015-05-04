@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html style="background:#8E8E8E">
+
+<head>
+<link rel="stylesheet" type="text/css" href="{% static 's_network/style.css' %}">
+
+<div id="header">
+<h1 style='font-size:300%'>{{ r_name }}'s info</h1>
+</div>
+
+<div id="l_sidebar"></div>
+<div id="r_sidebar"></div>
+
+{{ r_name }}'s birthday is {{ b_day }}
+<br>
+{{ r_name }}'s email is {{ email }}
+<br>
+{{ r_name }}'s username is {{ username }}
+<br><br>
+<a href='/s_network/{{ username }}/' style='background:pink'>Back to {{ r_name }}'s wall</a>
+</head>
+</html>

@@ -1,0 +1,40 @@
+{% extends "s_network/base.html" %}
+
+{% load staticfiles %}
+
+
+
+{% block header %}
+Your Search Results
+{% endblock %}
+
+
+
+{% block l_sidebar %}
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+{% endblock %}
+
+
+
+{% block l_content %}
+Name  ---  username
+		<br>
+		{% for user in results %}
+			<a href='/s_network/{{ user.username }}'>{{ user.first_name }} {{ user.last_name }} - {{ user }}</a>
+			<br>
+			<br>
+		{% endfor %}
+{% endblock %}
+
+
+
+{% block r_content %}
+<div> </div>
+{% endblock %}
+
+
+
+{% block r_sidebar %}
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+{% endblock %}

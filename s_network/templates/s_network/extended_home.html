@@ -1,0 +1,49 @@
+{% extends "s_network/base.html" %}
+
+{% load staticfiles %}
+
+
+
+{% block header %}
+Hello! Welcome to the S Network!
+{% endblock %}
+
+
+
+{% block l_sidebar %}
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+{% endblock %}
+
+
+
+{% block l_content %}
+	<form action={% url 'login' %} method='POST'>
+		{% csrf_token %}
+	    <div class='grid_4'>
+	        Username: <input type='text' name='username' size='20' />
+	        <br />
+	        Password: <input type='password' name='password' size='20' />
+	        <br />
+	    </div>
+	    <div class='grid_1'>
+	        <input type='submit' value='submit' id='id_login_form'/>
+	    </div>
+	</form>
+
+	Or register?
+
+	<br>
+	<a href='register'>Register</a>
+{% endblock %}
+
+
+
+{% block r_content %}
+<a href='/accounts/login/facebook/'>Log in with facebook(or connect up your account if you haven't yet)</a>
+{% endblock %}
+
+
+
+{% block r_sidebar %}
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+{% endblock %}

@@ -1,0 +1,115 @@
+{% load staticfiles %}
+<html style="background:#8E8E8E">
+<head>
+<link rel="stylesheet" type="text/css" href="{% static 's_network/style.css' %}">
+
+
+
+<div id="header">
+<h1 style='font-size:300%'>Welcome to {{ r_name }}'s profile</h1>
+</div>
+
+{% if user != username %}
+<a href='/s_network/{{user}}' style='background:teal'>return to your profile</a>
+{% endif %}
+
+<div class="section group">
+	<div class="col span_1_of_4" style="background:#3366FF">
+		{% if user == username %}
+			Only the owner of this profile can see this section
+			<br>
+				<a href='edit_profile'>Edit profile information</a> 
+			<br>
+				<a href='choose_profile_pic'>Choose new profile picture</a> 
+			<br>
+				<a href='upload_pics'>Upload photos</a>
+			<br>
+			-------------------------------------
+		{% else %}
+			<br><br><br><br><br>
+		{% endif %}
+		<br>
+			<a href='user_search'>Search for a user</a>
+		<br><br><br><br><br><br><br><br><br>
+		{{ user }} is logged in.
+	</div>
+
+
+	<div class="col span_1_of_4">
+		<a href="/static/{{profile_pic}}">
+			<div class="img">
+				{% if profile_pic %}
+					<img src='{% static profile_pic %}'/>
+				{% endif %}
+			</div>
+		</a>
+		<br><br>
+		<form action={% url 'new_wall_post' %} method='POST'>
+			{% csrf_token %}
+
+			<div>
+				<textarea style='width: 99%;height: 120px' name='text' class='' data-limit='10000' placeholder='Type in a wall post here'></textarea>
+				<br>
+				<button type='submit' onclick='' class='save'>save wallpost</button>
+				<input type='text' style='display:none;' name='profile_user' value={{username}}></input>
+				<input type='text' style='display:none;' name='poster' value={{user}}></input>
+			</div>
+		</form>
+
+	</div>
+
+
+	<div class="col span_1_of_4">
+		<a href='see_all_posts'>See all off {{ first_name }}'s wall's posts</a>
+		<br>
+		{% for post in wall_posts %}
+			{{post.post_date_time}} - <a href='/s_network/{{post.poster.user.username}}'>{{post.poster}}</a>
+			<br>
+			&emsp;{{ post.post_text }}
+			<br>
+				<div>
+				{% for comment in comments %}
+					{% if comment.wallpost == post %}
+						<p style='color:#000099'>&emsp;&emsp;<em>{{comment.comment_date_time}} - <a href='/s_network/{{comment.commenter.user.username}}'>{{comment.commenter}}</a></em> </p>
+						<p style='color:#000099'>&emsp;&emsp;&emsp;<em>{{comment.comment_text}}</em> </p>
+						
+					{% endif %}	
+				{% endfor %}
+				</div>
+
+				<div style='margin-top: 10px;'>
+					<form action={% url 'new_comment' %} method='POST'>
+						{% csrf_token %}
+						<input type='hidden' name='id' value={{post.id}}>
+						<div class='grid_1'>
+							&emsp;&emsp;<textarea style='width: 40%;height: 60px' name='text' class='' data-limit='10000' placeholder='comment on above post'></textarea>
+							<br>
+							<input type='text' style='display:none;' name='commenter' value={{user}}></input>
+							&emsp;&emsp;<button type='submit' onclick='' class='save'>save comment</button>
+						</div>
+					</form>
+				</div>
+
+
+			<br><br>
+		{% endfor %}
+	</div>
+
+
+	<div class="col span_1_of_4" style="background:#3366FF">
+		<br>
+		<a href='photos'>See {{ r_name }}'s photos</a>
+		<br>
+		<a href='info'>See {{ r_name }}'s info</a>
+		<br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+		<form action={% url 'logout' %} method='POST'>
+			{% csrf_token %}
+		    <div style='float:right'>
+		        <input type='submit' value='logout' id='id_logout_form'/>
+		    </div>
+		</form>
+	</div>
+</div>
+
+</html>

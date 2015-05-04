@@ -1,0 +1,58 @@
+{% load staticfiles %}
+<html style="background:#8E8E8E">
+<head>
+<link rel="stylesheet" type="text/css" href="{% static 's_network/style.css' %}">
+
+<div id="header">
+<h1 style='font-size:300%'>All of {{ first_name }}'s Wall Posts</h1>
+</div>
+
+<a href='/s_network/{{username}}' style='background:pink'>return to profile</a>
+
+<div class="section group">
+	<div class="col span_1_of_4" style="background:#3366FF">
+		<a href='/s_network/{{username}}' style='background:pink'>return to profile</a>
+		<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+	</div>
+
+
+	<div class="col span_1_of_4">
+		<div class="img">
+			{% if profile_pic %}
+			<img src='{% static profile_pic %}'/>
+			{% endif %}
+			
+		</div>
+		<br><br>
+
+	</div>
+
+
+	<div class="col span_1_of_4">
+		{% for post in wall_posts %}
+			{{post.post_date_time}} - <a href='/s_network/{{post.poster.user.username}}'>{{post.poster}}</a>
+			<div style="background:OrangeRed">
+				&emsp;{{ post.post_text }}
+				<br>
+			</div>
+				<div style="background:Gold">
+				{% for comment in comments %}
+					{% if comment.wallpost == post %}
+						<p style='color:#000099'>&emsp;&emsp;<em>{{comment.comment_date_time}} - <a href='/s_network/{{comment.commenter.user.username}}'>{{comment.commenter}}</a></em> </p>
+						<p style='color:#000099'>&emsp;&emsp;&emsp;<em>{{comment.comment_text}}</em> </p>
+						
+					{% endif %}	
+				{% endfor %}
+				</div>
+
+			<br><br>
+		{% endfor %}
+	</div>
+
+
+	<div class="col span_1_of_4" style="background:#3366FF"> 
+		<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+	</div>
+</div>
+
+</html>

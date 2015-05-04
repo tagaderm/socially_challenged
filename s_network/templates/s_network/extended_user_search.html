@@ -1,0 +1,49 @@
+{% extends "s_network/base.html" %}
+
+{% load staticfiles %}
+
+
+
+{% block header %}
+Search for a user
+{% endblock %}
+
+
+
+{% block l_sidebar %}
+<a href='/s_network/{{username}}' style='background:pink'>Cancel</a>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+{{ user }} is logged in.
+{% endblock %}
+
+
+
+{% block l_content %}
+<form action={% url 'search_results' %} method='POST'>
+		{% csrf_token %}
+	    <div class='grid_4'>
+	        email? <br /><input type='text' name='email' size='20' placeholder='email' />	       
+	        <br />
+	        First name? <br /><input type='text' name='first_name' size='20' placeholder='first name' /> 
+	        <br />
+	        Last name? <br /><input type='text' name='last_name' size='20' placeholder='last name' />
+	        <br />
+	        username? <br /><input type='text' name='username' size='20' placeholder='username' />
+	    </div>
+	    <div class='grid_1'>
+	        <input type='submit' value='Search' id='id_register_form'/>
+	    </div>
+	</form>
+{% endblock %}
+
+
+
+{% block r_content %}
+<div> </div>
+{% endblock %}
+
+
+
+{% block r_sidebar %}
+
+{% endblock %}
